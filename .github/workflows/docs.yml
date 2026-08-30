@@ -24,6 +24,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.repository == 'davingm/nuxt-davingm'
     name: Build Docs
     runs-on: ubuntu-latest
     steps:
