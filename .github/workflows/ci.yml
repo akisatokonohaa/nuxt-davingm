@@ -22,6 +22,7 @@ concurrency:
 
 jobs:
   validate:
+    if: github.repository == 'davingm/nuxt-davingm'
     name: Validate Package & Templates
     runs-on: ubuntu-latest
 
