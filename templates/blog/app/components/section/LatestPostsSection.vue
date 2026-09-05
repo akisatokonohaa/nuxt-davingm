@@ -2,24 +2,9 @@
 const overview = await useUserOverview();
 const { latestPosts } = overview;
 
-const { data: posts } = await useAsyncData("latest-blog-posts", async () => {
-	try {
-		if (typeof queryCollection === "function") {
-			const items = await queryCollection("blog").order("date", "DESC").limit(3).all();
-			if (items?.length > 0) {
-				return items.map((item: any) => ({
-					path: item.path || `/blog/${item.stem?.replace("blog/", "")}`,
-					title: item.title,
-					description: item.description,
-					date: item.date,
-					readTime: item.readTime || latestPosts.defaultReadTime,
-					tags: item.tags || [],
-				}));
-			}
-		}
-	} catch {}
-	return [];
-});
+const { data: posts } = await useAsyncData("latest-blog-posts", () =>
+	queryCollection("blog").order("date", "DESC").limit(3).all(),
+);
 </script>
 
 <template>
@@ -33,13 +18,21 @@ const { data: posts } = await useAsyncData("latest-blog-posts", async () => {
           {{ latestPosts.subheading }}
         </p>
       </div>
-      <NuxtLink to="/blog" class="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+      <NuxtLink v-if="posts && posts.length > 0" to="/blog" class="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
         <span>{{ latestPosts.viewAll }}</span>
         <Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />
       </NuxtLink>
     </div>
 
     <div class="space-y-3">
+      <div v-if="!posts || posts.length === 0" class="py-14 flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-neutral-200 dark:border-neutral-800">
+        <Icon name="lucide:file-text" class="w-9 h-9 text-neutral-300 dark:text-neutral-600" />
+        <p class="text-sm font-medium text-neutral-900 dark:text-neutral-100">No articles yet</p>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          Write your first post in
+          <code class="font-mono px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800">content/blog/</code>
+        </p>
+      </div>
       <NuxtLink
         v-for="post in posts"
         :key="post.path"
@@ -53,7 +46,7 @@ const { data: posts } = await useAsyncData("latest-blog-posts", async () => {
           <div class="flex items-center gap-2 text-xs font-mono text-neutral-400 dark:text-neutral-500 shrink-0">
             <span>{{ post.date }}</span>
             <span>•</span>
-            <span>{{ post.readTime }}</span>
+            <span>{{ post.readTime || latestPosts.defaultReadTime }}</span>
           </div>
         </div>
 
@@ -75,7 +68,7 @@ const { data: posts } = await useAsyncData("latest-blog-posts", async () => {
       </NuxtLink>
     </div>
 
-    <div class="sm:hidden pt-2 text-center">
+    <div v-if="posts && posts.length > 0" class="sm:hidden pt-2 text-center">
       <NuxtLink to="/blog" class="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100">
         <span>{{ latestPosts.viewAllMobile }}</span>
         <Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />
