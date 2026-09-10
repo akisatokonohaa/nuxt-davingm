@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "start": "node src/cli.js",
-    "docs:dev": "vitepress dev docs",
+    "docs:dev": "vitepress dev docs --port 4000",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "test": "node scripts/test-templates.mjs"

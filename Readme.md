@@ -11,7 +11,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/davingm/nuxt-davingm/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/davingm/nuxt-davingm/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](./LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js)](https://nodejs.org)
-
+v
 </div>
 
 ---
