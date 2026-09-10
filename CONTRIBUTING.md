@@ -1,10 +1,12 @@
 # Contributing to create-davingm-nuxt
 
-Terima kasih sudah tertarik berkontribusi! 🎉
-Semua bentuk kontribusi sangat disambut — mulai dari melaporkan bug, mengusulkan fitur, memperbaiki typo di dokumentasi, sampai mengirim pull request.
+Terima kasih sudah tertarik berkontribusi! 
+Semua bentuk kontribusi sangat disambut — mulai dari melaporkan bug, mengusulkan fitur, memperbaiki typo di dokumentasi, sampai mengirim pull request. se-kecil apapun akan kami perhatikan
+
+Karena mungkin kalian pernah dengar istilah "small step big impact" maka dari itu kami peduli dengan hal kecil.
+sekecil contribusi anda akan kami catat sebagai kontributor proyek ini di web kami.
 
 ---
-
 
 ## Code of Conduct
 
@@ -17,8 +19,8 @@ Project ini mengikuti prinsip dasar: **bersikap baik dan saling menghormati**. H
 1. Cek dulu di [Issues](https://github.com/davingm/nuxt-davingm/issues) — pastikan belum ada laporan serupa.
 2. Buat issue baru dengan template **Bug Report**.
 3. Sertakan:
-   - Langkah untuk mereproduksi bug
-   - Output error / stack trace (jika ada)
+   - Langkah untuk mereproduksi atau memicu bug tersebut
+   - Bagaimana dampaknya.
    - Versi Node.js, OS, dan package manager yang digunakan
 
 ---
@@ -60,15 +62,15 @@ node src/cli.js
 ```
 nuxt-davingm/
 ├── src/
-│   └── cli.js          # Entry point CLI utama
+│   └── cli.js          # <--- Entry point CLI utama
 ├── templates/
-│   ├── default/        # Template preset default
-│   ├── minimal/        # Template preset minimal
-│   └── jawa/           # Template preset jawa
+│   ├── default/        # <--- Template preset default
+│   ├── minimal/        # <--- Template preset minimal
+│   └── jawa/           # <--- Template preset jawa
 ├── .github/
 │   ├── workflows/
-│   │   └── ci.yml      # GitHub Actions CI
-│   └── ISSUE_TEMPLATE/ # Template issue
+│   │   └── ci.yml      # <--- GitHub Actions CI
+│   └── ISSUE_TEMPLATE/ # <--- Template issue
 ├── package.json
 ├── README.md
 ├── LICENSE
@@ -136,4 +138,4 @@ template(default): tambah konfigurasi ESLint flat config
 
 ---
 
-Terima kasih sudah berkontribusi!
+Terima kasih sudah berkontribusi! 💖
