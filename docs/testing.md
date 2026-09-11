@@ -1,40 +1,46 @@
-# Testing Mechanism
+# Mekanisme Testing E2E Template
 
-Davingm Nuxt Starter uses an automated end-to-end (E2E) testing mechanism to ensure all templates are healthy and buildable.
+Davingm Nuxt Starter menggunakan mekanisme pengujian otomatis *End-to-End* (E2E) untuk memastikan semua template sehat dan dapat di-build dengan baik oleh pengguna.
 
-## Overview
+## Gambaran Umum
 
-We use [Vitest](https://vitest.dev/) to execute concurrent tests for every project inside the `templates` directory. This ensures that:
-1. All templates can be copied successfully without leaking artifacts.
-2. The package dependencies install seamlessly without errors.
-3. The Nuxt build process (`nuxt build`) succeeds.
+Kami menggunakan [Vitest](https://vitest.dev/) untuk mengeksekusi tes secara **paralel (concurrent)** untuk setiap proyek di dalam folder `templates/`. Pengujian ini memastikan:
+1. Semua template dapat di-copy dengan sukses tanpa ada *file* atau artefak yang bocor.
+2. Dependensi (package manager) dapat di-install tanpa *error*.
+3. Proses build Nuxt (`npm run build`) berhasil 100%.
 
-## How to Run the Tests
+## Cara Menjalankan Testing
 
-To run the template verification tests locally, execute the following command in the root directory:
+Untuk menjalankan pengujian template secara lokal, eksekusi perintah berikut di root proyek:
 
 ```bash
-npm run test
-# or
 pnpm test
+# atau
+npm run test
 ```
 
-### What happens behind the scenes?
+### Memfilter Template Tertentu (Flag `-t`)
+Jika Anda hanya ingin mengetes **satu** template saja (misalnya template `auth`) untuk menghemat waktu, Anda dapat menggunakan flag `-t` bawaan Vitest. Ini akan mem-filter nama *test* yang cocok dengan kata yang Anda berikan:
+```bash
+pnpm test -t auth
+```
 
-When you run the test command:
-1. Vitest discovers `test/e2e/templates.test.js`.
-2. The test runner loops through all folders inside the `templates/` directory.
-3. For each template, it creates a temporary clone inside `test/.davingm/test-<template-name>`.
-4. It runs `pnpm install` and `npm run build` within that temporary directory to simulate a real-world user scaffolding and building the application.
-5. Once complete, Vitest provides an audit report in the terminal.
+## Apa yang terjadi di balik layar?
 
-## Error Handling & Interactive Output
+Saat Anda menjalankan perintah testing:
+1. Vitest akan mengeksekusi `test/e2e/templates.test.js`.
+2. Pengujian akan memindai (looping) semua sub-folder yang ada di dalam `templates/`.
+3. Untuk masing-masing template, sistem akan membuat tiruan/kloningan proyek sementara di dalam folder `test/.davingm/test-<nama-template>`.
+4. Sistem akan menjalankan `pnpm install` menggunakan *global store* (sehingga sangat cepat dan hemat RAM/disk) dan `npm run build` di dalam folder sementara tersebut. Ini secara akurat menyimulasikan pengalaman asli pengguna (real-world user) setelah membuat project.
+5. Setelah selesai, Vitest memberikan laporan *audit* dan *checklist* interaktif di terminal Anda.
 
-Because we are using **Vitest**, the terminal output acts like an interactive checklist.
-- **Concurrent Execution**: All templates run at the same time.
-- **Isolasi Error**: Jika ada 1 template yang *error*, pengujian untuk template tersebut akan ditandai dengan **silang merah (❌)**, tetapi template lain yang sedang berjalan **akan tetap dilanjutkan** hingga selesai.
-- **Detail Error**: Jika sebuah template gagal di tahap instalasi atau *build*, Vitest akan langsung mencetak *log error* spesifik (karena kita menggunakan opsi `stdio: 'pipe'`) ke layar terminal. Anda bisa melihat baris mana dan *package* mana yang membuat *build* Nuxt gagal.
+## Isolasi Error & Output Interaktif
 
-## Ignored Artifacts
+Karena kita menggunakan **Vitest**, output terminal berfungsi layaknya *checklist* yang dinamis:
+- **Eksekusi Bersamaan**: Semua template dites pada saat yang sama (secara paralel).
+- **Isolasi Error**: Jika ada 1 template yang bermasalah, pengujian untuk template tersebut akan ditandai dengan **silang merah (❌)**, tetapi template lain yang sedang berjalan **akan tetap dilanjutkan** hingga selesai. Vitest **tidak** akan menghentikan seluruh proses secara tiba-tiba.
+- **Detail Error Terminal**: Jika sebuah template gagal di tahap instalasi atau saat *build*, Vitest akan langsung mencetak *log error* yang spesifik ke layar terminal. Anda bisa melihat baris kode mana atau *package* apa yang membuat *build* Nuxt gagal.
 
-The temporary directory `test/.davingm/` is explicitly added to `.gitignore` and `.npmignore` to prevent test artifacts from being committed to the repository or published to NPM.
+## Artefak yang Diabaikan
+
+Folder hasil pengujian sementara (`test/.davingm/`) telah didaftarkan ke dalam `.gitignore` dan `.npmignore`. Dengan begitu, kloningan proyek dan *node_modules* berukuran besar yang dihasilkan selama proses *testing* **tidak akan** tersimpan ke repositori Git maupun terbawa saat publikasi ke NPM.

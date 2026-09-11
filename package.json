@@ -18,7 +18,7 @@
     "docs:dev": "vitepress dev docs --port 4000",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "test": "vitest run test/"
+    "test": "vitest run test/e2e/templates.test.js"
   },
   "keywords": [
     "create",

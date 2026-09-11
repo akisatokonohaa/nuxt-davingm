@@ -39,7 +39,7 @@ describe('Templates Verification', () => {
     // 2. Install dependencies menggunakan pnpm
     // (pnpm JAUH lebih cepat dan hemat storage karena menggunakan global store,
     // sangat penting jika jumlah template mencapai puluhan di masa depan)
-    execSync('pnpm install --no-audit --no-fund', { cwd: targetPath, stdio: 'pipe' });
+    execSync('pnpm install', { cwd: targetPath, stdio: 'pipe' });
 
     // 3. Build the project to verify it compiles correctly
     execSync('npm run build', { cwd: targetPath, stdio: 'pipe' });
