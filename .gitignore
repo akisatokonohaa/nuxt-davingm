@@ -16,6 +16,10 @@ dist/
 .data/
 **/.data/
 
+# test
+
+test/.davingm
+
 # Logs
 logs
 *.log

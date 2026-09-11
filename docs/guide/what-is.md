@@ -36,10 +36,10 @@ Setelah konfirmasi, CLI akan:
 
 | Fitur | `create-davingm-nuxt` | `create-nuxt` (official) |
 |---|---|---|
-| Setup Tailwind CSS | ✅ Otomatis | ⚙️ Manual |
-| Konfigurasi ESLint | ✅ Biome terintegrasi | ⚙️ Manual |
-| Konfigurasi Vitest | ✅ Siap pakai | ❌ Tidak termasuk |
-| Pilihan template | ✅ Multiple presets | Terbatas |
-| Multi package manager | ✅ 4 opsi | ✅ |
+| Setup Tailwind CSS |  ✓ Otomatis |  Manual |
+| Konfigurasi ESLint |  ✓ Biome terintegrasi |  Manual |
+| Konfigurasi Vitest |  ✓ Siap pakai |  Tidak termasuk |
+| Pilihan template |  ✓ Multiple presets | Terbatas |
+| Multi package manager |  ✓ 4 opsi |  ✓ |
 
 > **Catatan:** `create-davingm-nuxt` adalah opinionated tool — pilihan teknologi sudah ditentukan berdasarkan preferensi dan best practice dari davingm dan beberapa insinyur Nuxt Di indonesia.

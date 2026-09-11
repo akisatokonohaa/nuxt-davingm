@@ -3,8 +3,7 @@ layout: home
 
 hero:
   name: "Starter Proyek Nuxt"
-  text: "Mulai dalam Hitungan Detik"
-  tagline: Opinionated Nuxt starter generator dengan setup yang sudah dikurasi — TypeScript, Tailwind CSS, ESLint, dan banyak lagi, siap pakai.
+  tagline: "Mulai dalam hitungan detik, semuanya siap untuk mu"
   image:
     light: https://nuxt.com/assets/design-kit/icon-black.svg
     dark: https://nuxt.com/assets/design-kit/icon-white.svg
