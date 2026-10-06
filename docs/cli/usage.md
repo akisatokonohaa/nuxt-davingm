@@ -1,17 +1,17 @@
 # Penggunaan CLI
 
-Referensi lengkap penggunaan `create-davingm-nuxt` dari command line.
+Referensi lengkap penggunaan `create-nuxt-one` dari command line.
 
 ## Sinopsis
 
 ```bash
-npx create-davingm-nuxt
+npx create-nuxt-one
 # atau
-pnpm create davingm-nuxt
+pnpm create nuxt-one
 # atau
-yarn create davingm-nuxt
+yarn create nuxt-one
 # atau
-bunx create-davingm-nuxt
+bunx create-nuxt-one
 ```
 
 CLI tidak menerima argumen langsung — semua konfigurasi dilakukan melalui prompt interaktif.
@@ -65,9 +65,9 @@ CLI tidak menggunakan variabel environment apapun.
      .$$F` `$$L.$$A$$.
     j$$'    `4$$:` `$$.
 
-  Davingm Nuxt Starter  —  scaffold project baru dalam hitungan detik
+  Nuxt One Starter  —  scaffold project baru dalam hitungan detik
 
-◆  create-davingm-nuxt
+◆  create-nuxt-one
 ◇  Template mana yang ingin Anda gunakan?
 │  Default
 ◇  Di mana project ingin dibuat?

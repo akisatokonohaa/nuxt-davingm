@@ -6,8 +6,8 @@
 
 **Opinionated Nuxt starter generator — scaffold project baru dalam hitungan detik.**
 
-[![npm version](https://img.shields.io/npm/v/create-davingm-nuxt?style=flat-square&color=00DC82)](https://www.npmjs.com/package/create-davingm-nuxt)
-[![npm downloads](https://img.shields.io/npm/dm/create-davingm-nuxt?style=flat-square&color=00DC82)](https://www.npmjs.com/package/create-davingm-nuxt)
+[![npm version](https://img.shields.io/npm/v/create-nuxt-one?style=flat-square&color=00DC82)](https://www.npmjs.com/package/create-nuxt-one)
+[![npm downloads](https://img.shields.io/npm/dm/create-nuxt-one?style=flat-square&color=00DC82)](https://www.npmjs.com/package/create-nuxt-one)
 [![CI](https://img.shields.io/github/actions/workflow/status/davingm/nuxt-davingm/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/davingm/nuxt-davingm/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](./LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=flat-square&logo=node.js)](https://nodejs.org)
@@ -18,27 +18,27 @@ v
 
 ## Apa ini?
 
-`create-davingm-nuxt` adalah CLI generator untuk membuat project Nuxt baru dengan opinionated setup yang sudah dikurasi. Cukup satu perintah, project siap dengan struktur folder, konfigurasi ESLint, TypeScript, Tailwind CSS, dan banyak lagi.
+`create-nuxt-one` adalah CLI generator untuk membuat project Nuxt baru dengan opinionated setup yang sudah dikurasi. Cukup satu perintah, project siap dengan struktur folder, konfigurasi ESLint, TypeScript, Tailwind CSS, dan banyak lagi.
 
 ## Quick Start
 
 Jalankan langsung tanpa install global:
 
 ```bash
-npx create-davingm-nuxt
+npx create-nuxt-one
 ```
 
 Atau dengan package manager lain:
 
 ```bash
 # pnpm
-pnpm create davingm-nuxt
+pnpm create nuxt-one
 
 # yarn
-yarn create davingm-nuxt
+yarn create nuxt-one
 
 # bun
-bunx create-davingm-nuxt
+bunx create-nuxt-one
 ```
 
 CLI akan menampilkan prompt interaktif untuk:

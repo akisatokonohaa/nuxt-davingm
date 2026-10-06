@@ -1,6 +1,6 @@
 # Package Manager
 
-`create-davingm-nuxt` mendukung empat package manager populer.
+`create-nuxt-one` mendukung empat package manager populer.
 
 ## Package Manager yang Didukung
 

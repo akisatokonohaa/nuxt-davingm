@@ -2,7 +2,7 @@
 
 ## Versi yang Didukung
 
-Berikut adalah versi `create-davingm-nuxt` yang saat ini mendapatkan security updates:
+Berikut adalah versi `create-nuxt-one` yang saat ini mendapatkan security updates:
 
 | Version | Status |
 |---------|--------|
@@ -32,7 +32,7 @@ Agar maintainer dapat merespons dengan cepat dan tepat, sertakan informasi berik
 
 - **Deskripsi** kerentanan secara jelas
 - **Langkah-langkah** untuk mereproduksi masalah
-- **Versi** `create-davingm-nuxt` yang terpengaruh
+- **Versi** `create-nuxt-one` yang terpengaruh
 - **Dampak potensial** dari kerentanan ini
 - **Saran perbaikan** (jika ada)
 

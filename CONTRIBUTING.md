@@ -1,4 +1,4 @@
-# Contributing to create-davingm-nuxt
+# Contributing to create-nuxt-one
 
 Terima kasih sudah tertarik berkontribusi! 
 Semua bentuk kontribusi sangat disambut — mulai dari melaporkan bug, mengusulkan fitur, memperbaiki typo di dokumentasi, sampai mengirim pull request. se-kecil apapun akan kami perhatikan

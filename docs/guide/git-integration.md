@@ -1,6 +1,6 @@
 # Git Integration
 
-`create-davingm-nuxt` dapat menginisialisasi git repository secara otomatis saat membuat project baru.
+`create-nuxt-one` dapat menginisialisasi git repository secara otomatis saat membuat project baru.
 
 ## Cara Kerja
 

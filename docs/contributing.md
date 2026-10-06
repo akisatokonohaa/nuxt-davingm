@@ -1,6 +1,6 @@
 # Kontribusi
 
-Terima kasih sudah tertarik untuk berkontribusi pada `create-davingm-nuxt`! 🎉
+Terima kasih sudah tertarik untuk berkontribusi pada `create-nuxt-one`! 🎉
 
 ## Cara Berkontribusi
 
@@ -42,26 +42,26 @@ Proyek ini menggunakan [Conventional Commits](https://www.conventionalcommits.or
 
 Contoh:
 ```
-feat: tambahkan dukungan template custom
-fix: perbaiki deteksi git di Windows
-docs: update panduan quick start
+feat: tambahkan template ecommerce
+fix: perbaiki path database di Windows
+docs: update panduan template blog
 ```
 
 ## Menambah Template Baru
 
-Untuk menambah template baru:
+Untuk menambah template baru ke dalam CLI:
 
-1. Buat folder baru di `templates/` dengan nama template
+1. Buat folder baru di `templates/` dengan nama template (misal `ecommerce` atau `dashboard`)
 2. Isi dengan struktur project Nuxt yang diinginkan
-3. Pastikan tidak ada `node_modules` atau `.nuxt` di dalamnya
+3. Pastikan tidak ada `node_modules`, `.output`, atau `.nuxt` di dalamnya
 4. Update dokumentasi di `docs/templates/`
 
 ```
 templates/
-├── default/      ← Template yang sudah ada
-├── minimal/
-├── jawa/
-└── nama-template-baru/   ← Template baru kamu
+├── default/              ← Template standar
+├── auth/                 ← Template full-stack dengan auth & SQLite
+├── blog/                 ← Template blog & portofolio dengan Nuxt Content v3
+└── nama-template-baru/   ← Template baru kontribusimu
 ```
 
 ## Setup Development
@@ -72,10 +72,13 @@ git clone https://github.com/davingm/nuxt-davingm.git
 cd nuxt-davingm
 
 # Install dependencies
-npm install
+pnpm install
 
 # Jalankan CLI secara lokal
 node src/cli.js
+
+# Jalankan server dokumentasi lokal
+pnpm docs:dev
 ```
 
 ## Lisensi

@@ -1,6 +1,6 @@
 # Requirement
 
-Daftar requirement untuk menggunakan `create-davingm-nuxt`.
+Daftar requirement untuk menggunakan `create-nuxt-one`.
 
 ## Node.js
 
@@ -49,7 +49,7 @@ git --version
 
 ## Sistem Operasi
 
-`create-davingm-nuxt` mendukung semua sistem operasi utama:
+`create-nuxt-one` mendukung semua sistem operasi utama:
 
 - ✅ macOS
 - ✅ Linux

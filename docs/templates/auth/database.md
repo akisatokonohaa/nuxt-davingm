@@ -1,89 +1,90 @@
-# Database
+# Database & Migrasi (Template Auth)
 
-Starter ini menggunakan **SQLite** via `better-sqlite3` — database berbasis file yang berjalan langsung tanpa perlu server database eksternal. File database disimpan di `.data/database.sqlite` dan dibuat otomatis saat server pertama kali dijalankan.
+Starter kit **Auth** menggunakan **SQLite** via driver modern **`@libsql/client`** dan **Drizzle ORM** untuk type safety query. File database disimpan di `.data/database.sqlite` dan dibuat otomatis saat server pertama kali dijalankan.
 
 ---
 
-## Cara Kerja Inisialisasi
+## Driver `@libsql/client` & SQLite
 
-Saat `pnpm dev` atau `pnpm start` dijalankan, plugin `server/plugins/db.ts` dipanggil satu kali oleh Nitro:
+`@libsql/client` adalah klien database modern berbasis pure ESM yang sangat ringan dan kompatibel penuh dengan SQLite. Driver ini memungkinkan aplikasi berjalan secara lokal menggunakan file SQLite (`file:.data/database.sqlite`) maupun dihubungkan ke serverless distributed database seperti **Turso** cukup dengan mengubah URL di `.env`.
+
+---
+
+## Cara Kerja Inisialisasi Database
+
+Saat `pnpm dev` atau `pnpm build` dijalankan, plugin server Nitro `server/plugins/db.ts` dipanggil otomatis:
 
 ```
-Server start
-    └─ server/plugins/db.ts
-           └─ initDb()
-                 ├─ runMigrations()   → buat tabel jika belum ada
-                 └─ DatabaseSeeder.run() → isi data awal jika tabel kosong
+Server Start (Nitro Hook)
+     └─ server/plugins/db.ts
+            └─ initDb()
+                  ├─ runMigrations()   → membuat tabel jika belum ada
+                  └─ DatabaseSeeder.run() → mengisi user admin default jika tabel kosong
 ```
 
-Developer **tidak perlu menjalankan perintah migrasi secara manual** untuk mulai development.
+Pengembang **tidak perlu menjalankan migrasi manual** setiap kali setup awal. Semuanya berjalan otomatis!
 
 ---
 
-## Skema Tabel
+## Skema Tabel (`server/database/schema.ts`)
 
-Skema didefinisikan di `server/database/schema.ts` menggunakan Drizzle ORM.
+Skema didefinisikan secara deklaratif menggunakan Drizzle ORM:
 
-### Tabel `users`
+### 1. Tabel `users`
 
-| Kolom        | Tipe     | Keterangan                        |
-|--------------|----------|-----------------------------------|
-| `id`         | INTEGER  | Primary key, auto increment       |
-| `name`       | TEXT     | Nama lengkap pengguna             |
-| `email`      | TEXT     | Email unik, disimpan lowercase    |
-| `password`   | TEXT     | Hash bcrypt dari password         |
-| `created_at` | DATETIME | Waktu pembuatan (auto)            |
-| `updated_at` | DATETIME | Waktu terakhir diubah (auto)      |
+| Kolom | Tipe Data | Keterangan |
+|---|---|---|
+| `id` | `INTEGER` | Primary Key, Auto Increment |
+| `name` | `TEXT` | Nama lengkap pengguna |
+| `email` | `TEXT` | Alamat email unik (disimpan lowercase) |
+| `password` | `TEXT` | Hashed password menggunakan bcryptjs (12 rounds) |
+| `created_at` | `DATETIME` | Waktu registrasi (`CURRENT_TIMESTAMP`) |
+| `updated_at` | `DATETIME` | Waktu update profil |
 
-### Tabel `sessions`
+### 2. Tabel `sessions`
 
-| Kolom        | Tipe     | Keterangan                                           |
-|--------------|----------|------------------------------------------------------|
-| `id`         | TEXT     | UUID sesi                                            |
-| `user_id`    | INTEGER  | Foreign key ke `users.id` (CASCADE DELETE)           |
-| `token`      | TEXT     | Token acak yang disimpan di cookie                   |
-| `expires_at` | DATETIME | Waktu kadaluarsa sesi (7 hari dari login)            |
-| `created_at` | DATETIME | Waktu pembuatan (auto)                               |
+| Kolom | Tipe Data | Keterangan |
+|---|---|---|
+| `id` | `TEXT` | UUID sesi unik |
+| `user_id` | `INTEGER` | Foreign Key ke `users.id` (`ON DELETE CASCADE`) |
+| `token` | `TEXT` | Token aman yang disimpan pada `httpOnly` cookie |
+| `expires_at` | `DATETIME` | Waktu kedaluwarsa sesi (default: 7 hari) |
+| `created_at` | `DATETIME` | Waktu login dibuat |
 
 ---
 
-## Membuat Tabel Baru
+## Cara Menambahkan Tabel Baru
 
-Ini adalah alur lengkap untuk menambahkan tabel baru ke proyek.
+Berikut alur praktis menambahkan tabel baru ke dalam proyek:
 
-### Langkah 1 — Definisikan skema di `schema.ts`
-
-Buka `server/database/schema.ts` dan tambahkan definisi tabel:
+### Langkah 1 — Definisikan Skema di `server/database/schema.ts`
 
 ```typescript
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-
-// ... tabel yang sudah ada ...
+import { users } from "./schema";
 
 export const posts = sqliteTable("posts", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  user_id: integer("user_id").notNull(),
+  userId: integer("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   title: text("title").notNull(),
-  body: text("body").notNull(),
-  created_at: text("created_at"),
-  updated_at: text("updated_at"),
+  content: text("content").notNull(),
+  createdAt: text("created_at"),
+  updatedAt: text("updated_at"),
 });
 
 export type Post = typeof posts.$inferSelect;
 export type NewPost = typeof posts.$inferInsert;
 ```
 
-### Langkah 2 — Tambahkan SQL ke migrations
-
-Buka `server/database/migrations/index.ts` dan tambahkan SQL `CREATE TABLE` baru:
+### Langkah 2 — Tambahkan SQL Migrasi di `server/database/migrations/index.ts`
 
 ```typescript
 const CREATE_POSTS = `
   CREATE TABLE IF NOT EXISTS posts (
-    id         INTEGER  PRIMARY KEY AUTOINCREMENT,
-    user_id    INTEGER  NOT NULL,
-    title      TEXT     NOT NULL,
-    body       TEXT     NOT NULL,
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id    INTEGER NOT NULL,
+    title      TEXT NOT NULL,
+    content    TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
@@ -91,56 +92,63 @@ const CREATE_POSTS = `
 `;
 ```
 
-Lalu panggil di fungsi `runMigrations()`:
+Tambahkan `CREATE_POSTS` ke dalam fungsi `runMigrations()`:
 
 ```typescript
-db.exec(CREATE_USERS + CREATE_SESSIONS + CREATE_POSTS);
+await db.execute(CREATE_USERS);
+await db.execute(CREATE_SESSIONS);
+await db.execute(CREATE_POSTS); // ← tambahkan di sini
 ```
 
-Dan tambahkan juga ke `DROP_ALL` agar `create-drop` dan `db:fresh` berfungsi dengan benar:
+Dan daftarkan drop table di `freshDatabase()`:
 
 ```typescript
-const DROP_ALL = `
-  DROP TABLE IF EXISTS posts;      // ← tambahkan sebelum tabel yang menjadi foreign key target
-  DROP TABLE IF EXISTS sessions;
-  DROP TABLE IF EXISTS users;
-`;
+await db.execute("DROP TABLE IF EXISTS posts"); // ← drop tabel anak terlebih dahulu
+await db.execute(DROP_SESSIONS);
+await db.execute(DROP_USERS);
 ```
 
-> Urutan DROP penting: tabel yang memiliki foreign key ke tabel lain harus di-drop lebih dulu.
+### Langkah 3 — Buat Helper Query di `server/utils/db.ts`
 
-### Langkah 3 — Tambahkan fungsi query di `server/utils/db.ts`
+Gunakan klien `@libsql/client` asynchronous yang terintegrasi:
 
 ```typescript
-import type { Post } from "../database/schema";
-
-export async function findPostsByUserId(userId: number): Promise<Post[]> {
-  await initDb();
-  const conn = getConnection();
-  return conn
-    .prepare("SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC")
-    .all(userId) as Post[];
+export interface PostRecord {
+  id: number;
+  user_id: number;
+  title: string;
+  content: string;
+  created_at?: string;
 }
 
-export async function createPost(
-  userId: number,
-  title: string,
-  body: string,
-): Promise<Post> {
+export async function findPostsByUserId(userId: number): Promise<PostRecord[]> {
   await initDb();
   const conn = getConnection();
-  const info = conn
-    .prepare("INSERT INTO posts (user_id, title, body) VALUES (?, ?, ?)")
-    .run(userId, title, body);
-  const post = conn
-    .prepare("SELECT * FROM posts WHERE id = ?")
-    .get(info.lastInsertRowid) as Post;
-  if (!post) throw new Error("Gagal membuat post");
-  return post;
+  const result = await conn.execute({
+    sql: "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC",
+    args: [userId],
+  });
+  return result.rows as unknown as PostRecord[];
+}
+
+export async function createPost(userId: number, title: string, content: string): Promise<PostRecord> {
+  await initDb();
+  const conn = getConnection();
+  const result = await conn.execute({
+    sql: "INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)",
+    args: [userId, title, content],
+  });
+  
+  const insertedId = Number(result.lastInsertRowid);
+  const findResult = await conn.execute({
+    sql: "SELECT * FROM posts WHERE id = ? LIMIT 1",
+    args: [insertedId],
+  });
+  return findResult.rows[0] as unknown as PostRecord;
 }
 ```
 
-### Langkah 4 — Buat API endpoint
+### Langkah 4 — Buat Endpoint API Nitro
 
 Buat file `server/api/posts/index.get.ts`:
 
@@ -148,41 +156,31 @@ Buat file `server/api/posts/index.get.ts`:
 export default defineEventHandler(async (event) => {
   const user = await getUserFromEvent(event);
   if (!user) {
-    throw createError({ statusCode: 401, statusMessage: "Unauthenticated" });
+    throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
   }
 
-  const posts = await findPostsByUserId(user.id as number);
+  const posts = await findPostsByUserId(user.id);
   return { posts };
 });
-```
-
-### Langkah 5 — Restart server
-
-Jika `DB_TYPE=update`, cukup restart `pnpm dev`. Tabel baru akan dibuat otomatis karena kita pakai `CREATE TABLE IF NOT EXISTS`.
-
-Jika ingin reset dari awal (hapus semua data):
-
-```bash
-pnpm db:fresh:seed
 ```
 
 ---
 
 ## Perintah Database CLI
 
-Semua perintah ini dapat dijalankan langsung dari terminal tanpa server berjalan.
+Proyek menyertakan skrip CLI berbasis `tsx` untuk manajemen database:
 
 ```bash
-# Jalankan migrasi (buat tabel jika belum ada)
+# Jalankan migrasi tabel
 pnpm db:migrate
 
-# Jalankan seeder (isi data awal)
+# Jalankan seeder data awal
 pnpm db:seed
 
-# Reset database: drop semua tabel + migrasi ulang
+# Reset database (drop semua tabel + migrasi ulang)
 pnpm db:fresh
 
-# Reset database + isi data awal
+# Reset database sekaligus jalankan seeder
 pnpm db:fresh:seed
 ```
 
@@ -190,22 +188,25 @@ pnpm db:fresh:seed
 
 ## Menambahkan Seeder Baru
 
-Buat file seeder baru di `server/database/seeders/PostSeeder.ts`:
+Buat file seeder di `server/database/seeders/PostSeeder.ts`:
 
 ```typescript
 import { Seeder } from "./Seeder";
-import { createPost } from "../../utils/db";
+import { createPost, findUserByEmail } from "../../utils/db";
 
 export class PostSeeder extends Seeder {
   async run(): Promise<void> {
-    console.log("  [PostSeeder] Membuat post contoh...");
-    // logika seeding di sini
+    console.log("  [PostSeeder] Membuat data postingan contoh...");
+    const admin = await findUserByEmail("admin@example.com");
+    if (admin) {
+      await createPost(admin.id, "Halo Nuxt 4", "Ini adalah postingan pertama dari seeder.");
+    }
     console.log("  [PostSeeder] Selesai.");
   }
 }
 ```
 
-Lalu daftarkan di `DatabaseSeeder.ts`:
+Daftarkan di `server/database/seeders/DatabaseSeeder.ts`:
 
 ```typescript
 import { PostSeeder } from "./PostSeeder";
@@ -214,7 +215,7 @@ export class DatabaseSeeder extends Seeder {
   async run(): Promise<void> {
     await this.call([
       UserSeeder,
-      PostSeeder,  // ← tambahkan di sini
+      PostSeeder, // ← tambahkan di sini
     ]);
   }
 }
@@ -222,11 +223,10 @@ export class DatabaseSeeder extends Seeder {
 
 ---
 
-## Lokasi File Database
+## FAQ Database & Driver
 
-```
-.data/
-└── database.sqlite    ← file database utama
-```
+### Mengapa memilih `@libsql/client` daripada native SQLite bindings?
+`@libsql/client` adalah library pure TypeScript/ESM yang tidak memerlukan kompilasi C++ (`node-gyp`). Ini membuatnya berjalan mulus di Windows, Linux, macOS, Docker container, dan lingkungan serverless tanpa masalah error binary mismatch.
 
-Folder `.data/` sudah masuk ke `.gitignore` dan `.npmignore`. File ini tidak akan ter-commit ke repository dan tidak akan ikut saat publish ke npm. Setiap developer yang menjalankan proyek akan mendapat database segar miliknya sendiri.
+### Di mana file database disimpan?
+File database disimpan di `.data/database.sqlite`. Folder `.data/` sudah di-ignore oleh Git sehingga database lokal kamu tidak akan terunggah ke repositori publik.

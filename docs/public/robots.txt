@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Sitemap Index for Google, Baidu, Bing, and other search engines
+Sitemap: https://nuxt.davingm.com/sitemap.xml
+

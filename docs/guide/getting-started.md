@@ -1,70 +1,78 @@
-# Quick Start
+# Mulai Cepat
 
-Cara tercepat untuk memulai project Nuxt baru dengan `create-davingm-nuxt`.
+Panduan ringkas untuk membuat project Nuxt baru dengan `create-nuxt-one`.
 
-## Prerequisites
+## Prasyarat
 
-Sebelum mulai, pastikan kamu sudah memenuhi requirement berikut:
+Sebelum mulai, pastikan sistem kamu telah memenuhi syarat berikut:
 
 - **Node.js** versi `18.0.0` atau lebih baru
-- Salah satu package manager: `npm`, `pnpm`, `yarn`, atau `bun`
+- Salah satu package manager: `pnpm` (sangat direkomendasikan), `npm`, `yarn`, atau `bun`
 
-Cek versi Node.js yang terpasang:
+Cek versi Node.js yang terpasang di terminal:
 
 ```bash
 node --version
-# v18.x.x atau lebih baru
+# Output minimal: v18.0.0
 ```
+
+---
 
 ## Membuat Project Baru
 
-Jalankan salah satu perintah berikut sesuai package manager yang kamu gunakan:
+Jalankan perintah berikut sesuai package manager pilihan kamu:
 
 ::: code-group
 
 ```bash [npm]
-npx create-davingm-nuxt
+npx create-nuxt-one
 ```
 
 ```bash [pnpm]
-pnpm create davingm-nuxt
+pnpm create nuxt-one
 ```
 
 ```bash [yarn]
-yarn create davingm-nuxt
+yarn create nuxt-one
 ```
 
 ```bash [bun]
-bunx create-davingm-nuxt
+bunx create-nuxt-one
 ```
 
 :::
 
-## Ikuti Prompt Interaktif
+---
 
-Setelah perintah dijalankan, CLI akan menampilkan prompt interaktif:
+## Langkah-langkah Prompt Interaktif
 
-### 1. Pilih Template
+CLI akan memandu kamu melalui 4 langkah interaktif:
+
+### 1. Memilih Template Starter
 
 ```
 ◆  Template mana yang ingin Anda gunakan?
-│  ● Default (davingm recommended starter)
-│  ○ Minimal
+│  ● Default (Davingm recommended starter)
 │  ○ Auth
+│  ○ Blog
 ```
 
-Pilih template yang sesuai dengan kebutuhanmu. Lihat [perbandingan template](/templates/overview) untuk membantu memilih.
+- **Default**: Starter clean Nuxt 4 untuk aplikasi umum.
+- **Auth**: Full-stack Nuxt 4 dengan Autentikasi, Drizzle ORM, SQLite/LibSQL & UI Radix.
+- **Blog**: Situs Portofolio & Blog bertenaga Nuxt Content v3, Markdown & konfigurasi data YAML.
 
-### 2. Lokasi Project
+Lihat [Overview Template](/templates/overview) untuk perbandingan lengkap.
+
+### 2. Menentukan Lokasi Folder Project
 
 ```
 ◆  Di mana project ingin dibuat?
 │  ./my-project
 ```
 
-Masukkan path untuk project baru. Defaultnya adalah `./my-project`.
+Ketikkan path folder untuk project baru (misal `./my-app` atau `my-portfolio`). Default: `./my-project`.
 
-### 3. Package Manager
+### 3. Memilih Package Manager
 
 ```
 ◆  Package manager mana yang ingin digunakan?
@@ -74,35 +82,37 @@ Masukkan path untuk project baru. Defaultnya adalah `./my-project`.
 │  ○ Bun
 ```
 
-CLI otomatis mendeteksi package manager yang tersedia di sistem kamu.
+CLI otomatis hanya menampilkan package manager yang terpasang di sistem kamu.
 
-### 4. Initialize Git (Opsional)
+### 4. Inisialisasi Git Repository
 
 ```
 ◆  Initialize git repository?
 │  ● Yes / ○ No
 ```
 
-Jika `git` tersedia, kamu bisa langsung menginisialisasi repository.
+Pilih `Yes` jika ingin langsung membuat repository Git lokal (`git init`).
 
-## Setelah Instalasi
+---
 
-Setelah semua beres, CLI akan menampilkan next steps:
+## Menjalankan Project
+
+Setelah proses scaffolding dan instalasi dependencies selesai, CLI akan menampilkan pesan langkah selanjutnya:
 
 ```
-╭───── Next steps ────╮
-│                     │
-│   › cd ./my-project │
-│   › pnpm run dev    │
-│                     │
-╰─────────────────────╯
+╭── 👉 Next steps ───╮
+│                    │
+│   › cd ./my-project│
+│   › pnpm run dev   │
+│                    │
+╰────────────────────╯
 ```
 
-Masuk ke folder project dan jalankan development server:
+Masuk ke folder project dan nyalakan development server:
 
 ```bash
 cd my-project
-pnpm run dev
+pnpm dev
 ```
 
-Buka browser di `http://localhost:3000` — project siap! 🎉
+Buka peramban kamu di `http://localhost:3000`. Selamat, project Nuxt 4 kamu sudah aktif dan siap dikembangkan! 🚀
