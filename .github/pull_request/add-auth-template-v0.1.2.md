@@ -2,7 +2,7 @@
 
 ## Ringkasan
 
-Pull request ini menambahkan template starter baru bernama **auth** ke dalam paket `create-davingm-nuxt`, sekaligus memperbarui versi paket dari `0.1.1` ke `0.1.2` dan menyempurnakan konfigurasi `.npmignore` agar tidak ada file yang tidak diperlukan ikut terpublish ke npm.
+Pull request ini menambahkan template starter baru bernama **auth** ke dalam paket `create-nuxt-one`, sekaligus memperbarui versi paket dari `0.1.1` ke `0.1.2` dan menyempurnakan konfigurasi `.npmignore` agar tidak ada file yang tidak diperlukan ikut terpublish ke npm.
 
 ---
 

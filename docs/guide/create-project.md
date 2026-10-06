@@ -1,11 +1,11 @@
 # Membuat Project Baru
 
-Panduan lengkap membuat project Nuxt menggunakan `create-davingm-nuxt`.
+Panduan lengkap membuat project Nuxt menggunakan `create-nuxt-one`.
 
 ## Perintah Dasar
 
 ```bash
-npx create-davingm-nuxt
+npx create-nuxt-one
 ```
 
 CLI akan memandu kamu melalui proses pembuatan project langkah demi langkah.
@@ -48,9 +48,9 @@ Kamu bisa membatalkan proses kapan saja dengan menekan `Ctrl + C`. CLI akan mena
     j$$'    `4$$:` `$$.
     ...
 
-  Davingm Nuxt Starter  —  scaffold project baru dalam hitungan detik
+  Nuxt One Starter  —  scaffold project baru dalam hitungan detik
 
-◆  create-davingm-nuxt
+◆  create-nuxt-one
 
 ◆  Template mana yang ingin Anda gunakan?
 │  ● Default (Davingm recommended starter)

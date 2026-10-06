@@ -1,79 +1,109 @@
-# Memulai
+# Memulai Template Auth
+
+Panduan langkah demi langkah menjalankan template full-stack **Auth** Nuxt 4.
 
 ## Prasyarat
 
-- Node.js >= 18
-- pnpm (direkomendasikan) atau npm/yarn
+- **Node.js** >= `18.0.0`
+- **pnpm** (direkomendasikan) atau npm/yarn/bun
+
+---
 
 ## Instalasi
 
-Jika kamu menggunakan starter kit ini melalui CLI `nuxt-davingm`:
+Buat project baru menggunakan CLI `create-nuxt-one`:
 
-```bash
-npx nuxt-davingm@latest init my-app --template auth
-cd my-app
-pnpm install
+::: code-group
+
+```bash [pnpm]
+pnpm create nuxt-one
 ```
 
-Atau clone langsung dari repository:
-
-```bash
-git clone <repository-url> my-app
-cd my-app
-pnpm install
+```bash [npm]
+npx create-nuxt-one
 ```
 
-## Konfigurasi awal
+```bash [yarn]
+yarn create nuxt-one
+```
 
-Salin file contoh environment dan sesuaikan nilainya:
+```bash [bun]
+bunx create-nuxt-one
+```
+
+:::
+
+Saat prompt muncul, pilih preset **`Auth`**.
+
+---
+
+## Konfigurasi Environment (`.env`)
+
+Salin file `.env.example` menjadi `.env`:
 
 ```bash
 cp .env.example .env
 ```
 
-Isi minimal yang perlu diperhatikan:
+Contoh konfigurasi default:
 
 ```ini
-# Nama aplikasi
-NAME_APP="Nama Aplikasi Kamu"
+# Nama Aplikasi
+NAME_APP="Nuxt Auth Pro"
 
-# Ganti ini dengan string acak yang panjang di production!
-JWT_SECRET=ganti_dengan_secret_yang_kuat
+# Secret Key untuk penandatanganan JWT (GANTI di production!)
+JWT_SECRET="supersecretkey_change_me_in_production_min_32_chars"
 
-# Mode database saat server start
-# update      → aman untuk production, data tidak hilang
-# create-drop → reset semua tabel setiap start (cocok untuk development awal)
-DB_TYPE=update
+# Driver & Lokasi Database
+DB_CONNECTION="sqlite"
+DB_DATABASE=".data/database.sqlite"
+
+# Mode Database saat startup server:
+# "update"      → membuat tabel baru jika belum ada, data lama tetap aman (default)
+# "create-drop" → menghapus semua tabel dan membuat ulang saat server start (hanya untuk reset testing)
+DB_TYPE="update"
 ```
 
-> File `.data/database.sqlite` akan dibuat **otomatis** saat server pertama kali dijalankan. Kamu tidak perlu membuat file ini secara manual.
+> **Catatan Penting:** File database `.data/database.sqlite` akan dibuat **secara otomatis** saat server pertama kali dijalankan. Kamu tidak perlu membuat file database ini secara manual.
 
-## Menjalankan server development
+---
+
+## Menjalankan Development Server
 
 ```bash
 pnpm dev
 ```
 
-Server berjalan di `http://localhost:3000`. Saat pertama kali start, plugin database (`server/plugins/db.ts`) akan:
+Buka peramban di `http://localhost:3000`.
 
-1. Membuat folder `.data/` jika belum ada
-2. Menjalankan migrasi — membuat tabel `users` dan `sessions`
-3. Menjalankan seeder — membuat akun admin default (jika tabel masih kosong)
+Saat server pertama kali start, plugin server `server/plugins/db.ts` akan otomatis:
+1. Menyiapkan folder `.data/`
+2. Menjalankan migrasi tabel `users` dan `sessions`
+3. Menjalankan seeder akun administrator awal
 
-## Akun default (seeder)
+---
 
-| Field    | Nilai                |
-|----------|----------------------|
-| Email    | admin@example.com    |
-| Password | password             |
+## Akun Administrator Default (Seeder)
 
-Akun ini hanya dibuat satu kali. Jika sudah ada user dengan email tersebut, seeder akan dilewati.
+Starter kit telah menyediakan akun awal siap pakai:
 
-## Build untuk production
+| Field | Nilai Akun |
+|---|---|
+| **Email** | `admin@example.com` |
+| **Password** | `password` |
+
+Gunakan akun ini untuk login ke halaman `/login` dan mengakses `/dashboard`.
+
+---
+
+## Build untuk Production
 
 ```bash
+# Build aplikasi Nuxt & Nitro server
 pnpm build
+
+# Preview hasil build production lokal
 pnpm preview
 ```
 
-Pastikan `DB_TYPE=update` di `.env` production agar data tidak terhapus saat server restart.
+Pastikan di environment production nilai `DB_TYPE` selalu diset ke `update` agar data pengguna tidak terhapus saat server melakukan restart.

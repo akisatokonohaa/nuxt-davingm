@@ -8,7 +8,7 @@ hero:
   cli:
     label: "Quickstart via CLI"
     description: "Scaffold this exact portfolio starter directly with one terminal command:"
-    command: "npx nuxt-davingm@latest init my-portfolio"
+    command: "npx create-nuxt-one"
   actions:
     - label: "Explore Projects"
       to: "/projects"

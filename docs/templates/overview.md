@@ -1,71 +1,86 @@
-# Overview Template
+# Overview Starter Template
 
-`create-davingm-nuxt` menyediakan beberapa template preset yang bisa dipilih saat membuat project baru.
+`create-nuxt-one` menyediakan 3 pilihan template preset resmi yang dirancang dengan kebutuhan spesifik:
 
-## Perbandingan Template
+1. **Default** — Starter clean Nuxt 4 standar untuk aplikasi web modern.
+2. **Auth** — Boilerplate full-stack Nuxt 4 dengan Autentikasi, Drizzle ORM, SQLite/LibSQL, dan UI Radix.
+3. **Blog** — Situs Portofolio personal dan Blog modern bertenaga Nuxt Content v3, Markdown, dan data YAML.
 
-| Fitur | Default | Minimal | auth | blog | portofolio | dasbor |
-|---|:---:|:---:|:---:|:---:| :---:| :---:| 
-| Nuxt 4 | ✔ | ✔ | ✔ |  ✔ | ✔ | ✔ 
-| TypeScript | ✔ | ✔ |  ✔ |  ✔ | ✔ | ✔
-| Tailwind CSS | ✔ | ✔ |  ✔ |  ✔ | ✔ | ✔
-| ESLint + Biome | ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
-| Vitest | ✔ | ✘  |  ✔ |  ✔ | ✘ | ✔
-| Konfigurasi Deployment | ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
-| DevContainer | ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
-| GitHub Actions CI | ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
-| Opinionated Setup |  Moderat | ✘  |  Maksimal |  ✔ | ✘ | ✘
-| use SEO |  ✔ |  ✘  | ✔ |  ✔ | ✔ | ✘
-| Open Graph |  ✔ |  ✔ |  ✔ |  ✔ | ✔ | ✘
-| simpel-icons |  ✔ | ✘  |  ✔ |  ✔ | ✔ | ✔
-| hero-icons |  ✔ | ✘  |  ✔  |  ✔ | ✘ | ✔
-| markdown UI | ✘  | ✘  | ✘ |  ✔ | ✔ | ✘
-| Twikoo |  ✘ | ✘  | ✘  |  ✔  | ✔ | ✘
-| migration |  ✘ | ✘  | ✔ | ✘ | ✘ | ✘
-| seeders| ✘ | ✘ |  ✔ | ✘ | ✘ | ✘
-| SSG | ✔ | ✔ |  ✔ |  ✔ | ✔ | ✘
-| SSR | ✔ | ✔ |  ✔ |  ✔ | ✔ | ✔
-| CSR | ✔ | ✔ |  ✔ |  ✔ | ✘ | ✔
-| middleware | ✘ | ✘ |  ✔ |  ✘ | ✘ | ✔
-| service | ✔ | ✘ | ✔ | ✘ | ✘ | ✘
-| I81N ( multi bahasa ) | ✘ | ✘ | ✘ | ✔ |✘ | ✘
-| Dasbor | ✘ | ✘ | ✘ | ✘ | ✘ | ✔
-| authentikasi | ✘ | ✘ | ✔ | ✘ | ✘ | hanya ui
+---
 
+## Tabel Perbandingan Fitur
 
+| Fitur / Modul | Default | Auth (Fullstack) | Blog & Portofolio |
+|---|:---:|:---:|:---:|
+| **Versi Framework** | Nuxt 4 + Vue 3 | Nuxt 4 + Vue 3 | Nuxt 4 + Vue 3 |
+| **Language & Type Safety** | TypeScript | TypeScript | TypeScript |
+| **Styling CSS** | Tailwind CSS v3 | Tailwind CSS + Animate | Tailwind CSS + Typography |
+| **Linter & Formatter** | Biome | Biome | Biome |
+| **Unit Testing** | Vitest | Vitest | Vitest |
+| **Icons Integration** | Nuxt Icon (Heroicons & Simple Icons) | Nuxt Icon + Lucide Vue | Nuxt Icon (Lucide, Simple Icons) |
+| **UI Components** | Custom Header, Footer, Hero | Radix Vue (Shadcn style) | Custom Section UI + Accordion, Modal |
+| **Database ORM** | ✘ | Drizzle ORM + `@libsql/client` | Better-SQLite3 (Nuxt Content cache) |
+| **Sistem Autentikasi** | ✘ | JWT + Cookie Session + bcryptjs | ✘ |
+| **Auto Migration & Seed** | ✘ | ✓ (`pnpm db:migrate`, `pnpm db:seed`) | ✘ |
+| **Nuxt Content Engine** | ✘ | ✘ | ✓ (Nuxt Content v3 + Zod Schemas) |
+| **Headless Data YAML** | ✘ | ✘ | ✓ (`content/www/*.yml`) |
+| **Markdown Blog Support** | ✘ | ✘ | ✓ (`content/blog/*.md`) |
+| **Dark / Light Mode** | Custom composable | Client plugin | `@nuxtjs/color-mode` |
+| **Quick Search Palette** | ✘ | ✘ | ✓ (`Ctrl+K` command search) |
+| **DevContainer Docker** | ✓ | ✓ | ✓ |
+| **GitHub Actions CI** | ✓ | ✓ | ✓ |
+| **Target Deployment** | SSR / SSG (Vercel, Netlify, VPS) | SSR / Node (VPS, Docker, PM2) | SSG / SSR (GitHub Pages, Vercel, VPS) |
 
-## Cara Memilih Template
+---
 
-**Gunakan Default jika:**
-- Kamu ingin setup lengkap dan siap production
-- Membangun aplikasi Nuxt serius dengan full toolchain
-- Ingin mengikuti best practices yang sudah dikurasi
+## Panduan Memilih Template
 
-**Gunakan Minimal jika:**
-- Sedang prototyping atau eksperimen cepat
-- Ingin kontrol penuh atas setiap konfigurasi
-- Membangun sesuatu yang sederhana tanpa overhead
+### 1. Gunakan Template **Default** jika:
+- Kamu ingin membuat website atau aplikasi Nuxt 4 clean tanpa dependensi database atau CMS bawaan.
+- Kamu menghubungkan aplikasi ke backend terpisah (misalnya Laravel API, Express, Go, NestJS, atau Supabase).
+- Kamu membutuhkan setup standar dengan arsitektur composable service (`useUserService`, `useApi`).
 
-**Gunakan auth jika:**
-- Kamu sudah familiar dengan workflow moderen
-- Ingin setup yang paling opinionated dan lengkap
-- Memiliki sistem full stack tanpa memiliki proyek backend sendiri
+👉 [Lihat Panduan Lengkap Template Default](/templates/default)
 
-**Gunakan blog jika:**
-- Membutuhkan dukungan markdown menjadi html minimalis
-- Membangun sistem Blog sendiri
-- Membutuhkan dukungan *Search Engine Optimization* (SEO)
+### 2. Gunakan Template **Auth** jika:
+- Kamu ingin membangun aplikasi **full-stack mandiri** yang memiliki fitur login, register, dan dashboard admin tanpa backend terpisah.
+- Membutuhkan sistem database lokal atau embedded serverless (SQLite / LibSQL / Turso) dengan migrasi otomatis.
+- Menginginkan komponen UI siap pakai bergaya *shadcn-vue* berbasis Radix Vue (Sidebar, Dropdown, Modal, Form, Input, Card).
+- Butuh middleware keamanan route (`auth.ts`, `guest.ts`, `redirect-authenticated.ts`).
 
-**Gunakan Portofolio jika:**
-- Sedang Membangun Branding Pribadi
-- Membutuhkan Situs Statis Cepat 
-- Ingin terlihat Profesional dan Proper
+👉 [Lihat Panduan Lengkap Template Auth](/templates/auth/getting-started)
 
-**Gunakan Portofolio Dasbor jika:**
-- Sedang Membangun dashbor interaktif 
-- Membutuhkan menejemen ERD bisnis dan dashboard realtime 
-- Dukungan SLA penuh terhadap sistem anda
+### 3. Gunakan Template **Blog** jika:
+- Kamu ingin memiliki **Personal Portfolio & Blog** modern kelas dunia dengan performa instan.
+- Ingin mengedit biodata, keahlian (*skills*), portofolio proyek, riwayat karier, galeri foto, FAQ, dan link teman hanya dengan mengedit file **YAML** tanpa menyentuh kode Vue.
+- Menulis artikel blog teknis dengan format **Markdown** yang indah dan SEO-optimized.
+- Membutuhkan fitur navigasi keyboard cepat dengan QuickSearch Command Palette (`Ctrl+K` / `Cmd+K`).
 
-## Menambah Template Sendiri
+👉 [Lihat Panduan Lengkap Template Blog](/templates/blog/getting-started)
 
-Kamu bisa menambahkan template custom dengan membuat folder baru di direktori `templates/` di repository ini. Lihat [CONTRIBUTING.md](https://github.com/davingm/nuxt-davingm/blob/main/CONTRIBUTING.md) untuk panduan kontribusi.
+---
+
+## Bagian yang Umum Diedit Pengembang
+
+| Bagian | Lokasi File | Fungsi |
+|---|---|---|
+| **Variabel Lingkungan** | `.env` / `.env.example` | Base API, DB connection, Secret Key, Nama Aplikasi |
+| **Konfigurasi Nuxt** | `nuxt.config.ts` | Modul, plugins, runtimeConfig, routeRules, SEO |
+| **Tema & Warna** | `tailwind.config.ts` | Color palette, font-family, tema styling |
+| **Aturan Lint / Format** | `.biome.json` | Aturan indentation, formatter, linter rules |
+| **Pipeline CI/CD** | `.github/workflows/ci.yml` | Pengujian otomatis & build di GitHub |
+| **Halaman & Rute** | `app/pages/` | Routing berbasis file Nuxt |
+| **Logika Bisnis & Fetch** | `app/composables/` | Auto-imported state & API handler |
+
+---
+
+## FAQ Singkat Pengembang
+
+### Mengapa menggunakan Biome daripada ESLint + Prettier?
+Biome ditulis menggunakan Rust dan berjalan 10–20x lebih cepat dibanding kombinasi ESLint dan Prettier. Biome menggabungkan formatting dan linting dalam satu konfigurasi minimal `.biome.json`.
+
+### Apakah struktur folder menggunakan standar Nuxt 4?
+Ya! Seluruh template menggunakan folder `app/` untuk kode frontend (components, pages, layouts, composables, assets) dan `server/` untuk backend/API Nitro.
+
+### Bagaimana jika ingin menambahkan template kustom sendiri?
+Kamu dapat menambahkan folder preset baru di dalam folder `templates/` pada repository ini. CLI akan otomatis mendeteksi nama folder tersebut sebagai preset saat dijalankan.

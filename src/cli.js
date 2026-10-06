@@ -26,11 +26,11 @@ const banner = `
 console.log(pc.white(banner))
 
 console.log(
-  pc.bold(pc.white('  Davingm Nuxt Starter')) +
+  pc.bold(pc.white('  Nuxt One Starter')) +
   pc.dim('  —  scaffold project baru dalam hitungan detik\n')
 )
 
-p.intro(pc.bgCyan(pc.black('create-davingm-nuxt')))
+p.intro(pc.bgCyan(pc.black('create-nuxt-one')))
 
 
 function exitCancelled() {

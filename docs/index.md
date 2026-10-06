@@ -2,12 +2,11 @@
 layout: home
 
 hero:
-  name: "Starter Proyek Nuxt"
-  tagline: "Mulai dalam hitungan detik, semuanya siap untuk mu"
+  name: "Nuxt One Starter"
+  tagline: "Mulai dalam hitungan detik, semua konfigurasi siap pakai untukmu"
   image:
-    light: https://nuxt.com/assets/design-kit/icon-black.svg
-    dark: https://nuxt.com/assets/design-kit/icon-white.svg
-    alt: create-davingm-nuxt
+    src: /image.png
+    alt: Nuxt One Starter
   actions:
     - theme: brand
       text: Quick Start →
@@ -19,25 +18,25 @@ hero:
 features:
   - icon: ⚡
     title: Satu Perintah, Project Siap
-    details: Cukup jalankan npx create-davingm-nuxt dan ikuti prompt interaktif. Dalam hitungan detik, project Nuxt kamu sudah siap dengan konfigurasi lengkap.
+    details: Cukup jalankan npx create-nuxt-one dan ikuti prompt interaktif. Dalam hitungan detik, project Nuxt 4 kamu sudah siap dengan toolchain lengkap.
 
   - icon: 🎨
-    title: Template Presets Terkurasi
-    details: Pilih dari beberapa preset — Default (setup lengkap), Minimal (prototyping cepat), atau Jawa (opinionated setup Davingm).
+    title: 3 Template Presets Terkurasi
+    details: Pilih dari preset — Default (standard clean Nuxt 4), Auth (Full-stack dengan Drizzle ORM, SQLite/LibSQL & Session), atau Blog (Portfolio & Nuxt Content v3).
 
   - icon: 📦
     title: Multi Package Manager
     details: Mendukung pnpm, npm, yarn, dan bun. CLI otomatis mendeteksi package manager yang tersedia di sistem kamu.
 
   - icon: 🔧
-    title: Batteries Included
-    details: Preset Default sudah menyertakan Nuxt 4, Tailwind CSS, TypeScript, ESLint dengan Biome, Vitest, dan konfigurasi deployment.
+    title: Modern Stack & Tools
+    details: Dilengkapi Nuxt 4, Tailwind CSS, TypeScript, Biome (lint & formatting super cepat), Vitest, dan konfigurasi deployment siap pakai.
 
   - icon: 🗂️
-    title: Git Auto-init
-    details: Opsi untuk langsung menginisialisasi git repository pada project baru, sehingga kamu bisa langsung mulai commit.
+    title: Git Auto-init & DevContainer
+    details: Opsi langsung menginisialisasi repository Git serta dukungan VS Code DevContainer untuk environment development yang konsisten.
 
   - icon: 🛡️
-    title: Validasi Otomatis
-    details: CLI memvalidasi nama folder, menangani folder yang sudah ada, dan memberikan feedback yang jelas saat terjadi error.
+    title: Validasi Otomatis & Best Practices
+    details: Arsitektur terstruktur, auto-import composables, type-safe schema, serta penanganan error yang rapi untuk skala production.
 ---

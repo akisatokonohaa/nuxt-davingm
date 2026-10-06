@@ -1,6 +1,6 @@
 # Mekanisme Testing E2E Template
 
-Davingm Nuxt Starter menggunakan mekanisme pengujian otomatis *End-to-End* (E2E) untuk memastikan semua template sehat dan dapat di-build dengan baik oleh pengguna.
+Nuxt One Starter menggunakan mekanisme pengujian otomatis *End-to-End* (E2E) untuk memastikan semua template sehat dan dapat di-build dengan baik oleh pengguna.
 
 ## Gambaran Umum
 

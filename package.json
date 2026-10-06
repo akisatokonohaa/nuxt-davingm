@@ -1,9 +1,9 @@
 {
-  "name": "create-davingm-nuxt",
+  "name": "create-nuxt-one",
   "version": "0.1.7",
   "description": "Opinionated Nuxt starter generator — scaffold project baru dalam hitungan detik",
   "bin": {
-    "create-davingm-nuxt": "src/cli.js"
+    "create-nuxt-one": "src/cli.js"
   },
   "files": [
     "src",
